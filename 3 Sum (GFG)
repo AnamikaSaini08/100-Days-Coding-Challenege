@@ -1,0 +1,36 @@
+//GFG SOLUTION
+  
+  void solve(int ind , int target , int nums[] , bool &ans , int n)
+    {
+        unordered_map<int,int>mp;
+        mp[nums[ind]] = 1;
+        target -= nums[ind];
+        ind += 1;
+        
+        for(int i = ind ; i<n ; i++)
+        {
+            int temp = target - nums[i];
+            
+            if(mp.find(temp) == mp.end() )
+                mp[nums[i]] = 1;
+            else{
+                ans = true;
+                return;
+            }
+        }
+        return;
+    }
+    bool find3Numbers(int nums[], int n, int X)
+    {
+        //Your Code Here
+        bool  ans = false;
+        
+        for(int i=0 ; i<n-2 ; i++)
+        {
+            vector<int>res;
+            solve(i , X , nums , ans , n);
+            if(ans)
+               return true;
+        }
+        return false;
+    }
