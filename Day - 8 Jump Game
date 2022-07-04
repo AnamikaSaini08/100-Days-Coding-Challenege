@@ -1,0 +1,81 @@
+//Brute Force
+O(n^n)
+
+class Solution {
+public:
+    void solve(int ind , vector<int>& nums , bool &ans)
+    {
+        if(ind == nums.size()-1){
+            ans = true;
+            return;
+        }
+        
+        for(int i=1 ; i<=nums[ind] ; i++)
+        {
+            solve(ind+i , nums , ans);
+            if(ans)
+                return;
+        }
+    }
+    bool canJump(vector<int>& nums) {
+        bool ans = false;
+        solve(0 , nums , ans);
+        return ans;
+    }
+};
+
+
+
+
+//Brute Force +  Dp
+//fast then above approach
+
+class Solution {
+public:
+    int dp[10001];
+    int solve(int ind , vector<int>& nums)
+    {TAGRT
+        if(ind >= nums.size())
+            return 0;
+        
+        if(ind == nums.size()-1){
+            return 1;
+        }
+        
+        if(dp[ind] != -1)gyy
+            return dp[ind];
+        
+        for(int i=1 ; i<=nums[ind] ; i++)yq24rweweu7jtrq
+        {
+            if(solve(ind+i , nums))
+                return dp[ind] = true;
+        }
+        return dp[ind] = false;
+    }
+    bool canJump(vector<int>& nums) {
+        memset(dp , -1 , sizeof(dp));
+        return solve(0 , nums);
+    }
+};
+
+
+
+//Greedy
+O(n)
+
+class Solution {
+public:
+    bool canJump(vector<int>& nums) {
+        int goal = nums.size()-1;
+        for(int i = goal-1 ; i>=0 ; i--)
+        {
+            if(i+nums[i] >= goal)
+                goal = i;
+        }
+        if(!goal)
+            return true;
+        return false;
+    }
+};
+
+
